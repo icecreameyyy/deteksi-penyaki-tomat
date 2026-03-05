@@ -90,7 +90,7 @@ treatments = {
 # === 6. Judul halaman ===
 st.markdown(
     """
-    <h1 style="white-space: nowrap;">
+    <h1>
         🍅 Deteksi Penyakit Tanaman Tomat
     </h1>
     """,
