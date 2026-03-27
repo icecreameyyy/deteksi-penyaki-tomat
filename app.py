@@ -101,7 +101,7 @@ st.markdown(
         /* Kode khusus untuk layar kecil (HP) */
         @media (max-width: 600px) {
             .judul-responsif {
-                font-size: 35px; /* Huruf mengecil sedikit di HP agar pas 2-3 baris */
+                font-size: 38px; /* Huruf mengecil sedikit di HP agar pas 2-3 baris */
             }
         }
     </style>
