@@ -91,8 +91,8 @@ treatments = {
 st.markdown(
     """
     <style>
-        .judul-responsif {
-            font-size: 48px; /* Ukuran di Laptop */
+        .judul {
+            font-size: 47px; /* Ukuran di Laptop */
             font-weight: bold;
             line-height: 1.2;
             text-align: left;
@@ -100,13 +100,13 @@ st.markdown(
 
         /* Kode khusus untuk layar kecil (HP) */
         @media (max-width: 600px) {
-            .judul-responsif {
-                font-size: 39px; /* Huruf mengecil sedikit di HP agar pas 2-3 baris */
+            .judul {
+                font-size: 50px; /* Huruf mengecil sedikit di HP agar pas 2-3 baris */
             }
         }
     </style>
     
-    <div class="judul-responsif">
+    <div class="judul">
         🍅 Deteksi Penyakit Tanaman Tomat
     </div>
     """, 
