@@ -23,7 +23,7 @@ st.markdown("""
         border-radius: 12px;
         text-align: center;
         font-size: 20px;
-        font-weight: italic;
+        font-weight: bold;
     }
     .healthy {
         background-color: #e6ffe6;
