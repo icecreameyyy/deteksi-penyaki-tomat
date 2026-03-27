@@ -7,7 +7,7 @@ import time
 import os
 
 # === 1. Konfigurasi halaman ===
-st.set_page_config(page_title="Deteksi Penyakit Tanaman Tomat", page_icon="🍅", layout="center")
+st.set_page_config(page_title="Deteksi Penyakit Tanaman Tomat", page_icon="🍅", layout="centered")
 
 # === 2. Gaya CSS ===
 st.markdown("""
