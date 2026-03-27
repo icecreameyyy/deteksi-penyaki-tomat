@@ -92,7 +92,7 @@ st.markdown(
     """
     <style>
         .judul-responsif {
-            font-size: 50px; /* Ukuran di Laptop */
+            font-size: 48px; /* Ukuran di Laptop */
             font-weight: bold;
             line-height: 1.2;
             text-align: left;
@@ -101,7 +101,7 @@ st.markdown(
         /* Kode khusus untuk layar kecil (HP) */
         @media (max-width: 600px) {
             .judul-responsif {
-                font-size: 38px; /* Huruf mengecil sedikit di HP agar pas 2-3 baris */
+                font-size: 39px; /* Huruf mengecil sedikit di HP agar pas 2-3 baris */
             }
         }
     </style>
