@@ -27,7 +27,7 @@ st.markdown("""
     }
     .healthy {
         background-color: #e6ffe6;
-        color: green;
+        color: blue;
         border: 2px solid green;
     }
     .disease {
