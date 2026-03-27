@@ -13,7 +13,7 @@ st.set_page_config(page_title="Deteksi Penyakit Tanaman Tomat", page_icon="🍅"
 st.markdown("""
     <style>
     [data-testid="stAppViewContainer"] {
-        background-color: #339933;
+        background-color: #ffe636;
     }
     header[data-testid="stHeader"] {
         background-color: #ff4d4d;
