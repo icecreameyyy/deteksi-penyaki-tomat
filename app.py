@@ -91,7 +91,7 @@ treatments = {
 st.markdown(
     """
     <h1>
-        🍅 Deteksi Penyakit Tanaman Tomat
+    🍅 Deteksi Penyakit Tanaman Tomat
     </h1>
     """,
     unsafe_allow_html=True
