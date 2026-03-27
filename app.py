@@ -21,7 +21,7 @@ st.markdown("""
     .result-box {
         padding: 15px;
         border-radius: 12px;
-        text-align: center;
+        text-align: justify;
         font-size: 18px;
         font-weight: bold;
     }
