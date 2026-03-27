@@ -37,7 +37,7 @@ st.markdown("""
     }
     .treatment-box {
         background-color: #fffbea;
-        border: 2px double #ffb84d;
+        border: 2px dashed #ffb84d;
         padding: 12px;
         border-radius: 10px;
         margin-top: 10px;
