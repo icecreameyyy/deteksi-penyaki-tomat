@@ -22,8 +22,8 @@ st.markdown("""
         padding: 15px;
         border-radius: 12px;
         text-align: center;
-        font-size: 25px;
-        font-weight: bold;
+        font-size: 20px;
+        font-weight: italic;
     }
     .healthy {
         background-color: #e6ffe6;
