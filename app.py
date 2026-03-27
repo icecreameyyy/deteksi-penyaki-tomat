@@ -92,7 +92,7 @@ st.markdown(
     """
     <style>
         .judul{
-            font-size: 45px; /* Ukuran di Laptop */
+            font-size: 50px; /* Ukuran di Laptop */
             font-weight: bold;
             line-height: 1.2;
             text-align: left;
