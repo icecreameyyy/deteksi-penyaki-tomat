@@ -7,7 +7,7 @@ import time
 import os
 
 # === 1. Konfigurasi halaman ===
-st.set_page_config(page_title="Deteksi Penyakit Tanaman Tomat", page_icon="🍅", layout="wide")
+st.set_page_config(page_title="Deteksi Penyakit Tanaman Tomat", page_icon="🍅", layout="centered")
 
 # === 2. Gaya CSS ===
 st.markdown("""
@@ -91,7 +91,7 @@ treatments = {
 st.markdown(
     """
     <style>
-        .setelan{
+        .judul{
             font-size: 45px; /* Ukuran di Laptop */
             font-weight: bold;
             line-height: 1.2;
@@ -100,13 +100,13 @@ st.markdown(
 
         /* Kode khusus untuk layar kecil (HP) */
         @media (max-width: 600px) {
-            .setelan {
+            .judul {
                 font-size: 37px; /* Huruf mengecil sedikit di HP agar pas 2-3 baris */
             }
         }
     </style>
     
-    <div class="setelan">
+    <div class="judul">
         🍅 Deteksi Penyakit Tanaman Tomat
     </div>
     """, 
