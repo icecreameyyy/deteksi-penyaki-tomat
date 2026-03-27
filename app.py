@@ -90,13 +90,28 @@ treatments = {
 # === 6. Judul halaman ===
 st.markdown(
     """
-    <h1>
+    <style>
+        .judul-responsif {
+            font-size: 45px; /* Ukuran di Laptop */
+            font-weight: bold;
+            line-height: 1.2;
+            text-align: left;
+        }
+
+        /* Kode khusus untuk layar kecil (HP) */
+        @media (max-width: 600px) {
+            .judul-responsif {
+                font-size: 32px; /* Huruf mengecil sedikit di HP agar pas 2-3 baris */
+            }
+        }
+    </style>
+    
+    <div class="judul-responsif">
         🍅 Deteksi Penyakit Tanaman Tomat
-    </h1>
+    </div>
     """, 
     unsafe_allow_html=True
 )
-
 st.write("Upload gambar tomat (buah/daun), lalu sistem akan mendeteksi jenis penyakit yang menyerang tanaman tomat serta menampilkan cara penanganannya.")
 
 # === 7. Upload gambar ===
