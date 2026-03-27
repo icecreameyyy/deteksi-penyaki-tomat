@@ -107,7 +107,7 @@ st.markdown(
     </style>
     
     <div class="judul">
-    🍅Deteksi Penyakit Tanaman Tomat
+        🍅 Deteksi Penyakit    Tanaman Tomat
     </div>
     """, 
     unsafe_allow_html=True
