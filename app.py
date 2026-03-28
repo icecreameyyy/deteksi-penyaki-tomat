@@ -102,6 +102,7 @@ st.markdown(
         @media (max-width: 600px) {
             .judul {
                 font-size: 39px; /* Huruf mengecil sedikit di HP agar pas 2-3 baris */
+                margin-bottom: 15px; 
             }
         }
     </style>
