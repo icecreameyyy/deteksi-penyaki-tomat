@@ -96,6 +96,7 @@ st.markdown(
             font-weight: bold;
             line-height: 1.2;
             text-align: left;
+            margin-bottom: 20px;
         }
 
         /* Kode khusus untuk layar kecil (HP) */
