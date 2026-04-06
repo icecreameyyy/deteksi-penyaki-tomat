@@ -12,7 +12,6 @@ st.set_page_config(page_title="Deteksi Penyakit Tanaman Tomat", page_icon="🍅"
 # === 2. Gaya CSS ===
 st.markdown("""
     <style>
-    /* Container utama untuk menumpuk elemen */
     .upload-wrapper {
         position: relative;
         width: 100%;
@@ -21,7 +20,6 @@ st.markdown("""
         margin-bottom: 20px;
     }
 
-    /* Kotak Visual yang dilihat user */
     .upload-box-visual {
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
@@ -33,42 +31,28 @@ st.markdown("""
         padding: 0 25px;
         background-color: #ffffff;
         z-index: 1;
-        pointer-events: none; /* Klik tembus ke widget asli */
+        /* KRUSIAL: Agar klik bisa "tembus" ke uploader asli */
+        pointer-events: none; 
     }
 
+    /* CSS lainnya tetap sama seperti sebelumnya */
     .info-left { display: flex; align-items: center; gap: 15px; }
     .cloud-icon { font-size: 35px; color: #888; }
     .text-main { font-weight: bold; font-size: 15px; color: #333; display: block; }
     .text-sub { font-size: 12px; color: #888; }
     .browse-text { font-weight: bold; text-decoration: underline; color: #333; font-size: 14px; }
 
-    /* Membuat Uploader Asli Streamlit Transparan & Menutupi Seluruh Area */
     [data-testid="stFileUploader"] {
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 10;
+        z-index: 10; /* Berada di atas visual */
         opacity: 0; 
     }
     
-    /* Memastikan section internal uploader memenuhi container */
     [data-testid="stFileUploader"] section {
         padding: 0 !important;
         height: 100px !important;
-        min-height: 100px !important;
     }
-
-    /* Dekorasi lainnya */
-    [data-testid="stAppViewContainer"] { background-color: #ffe6e6; }
-    header[data-testid="stHeader"] { background-color: #ff4d4d; }
-    .result-box { padding: 15px; border-radius: 12px; text-align: center; font-size: 20px; font-weight: bold; }
-    .healthy { background-color: #e6ffe6; color: green; border: 2px solid green; }
-    .disease { background-color: #f3f3f3; color: #b30000; border: 2px solid #b30000; }
-    .treatment-box { background-color: #fffbea; border: 2px dashed #ffb84d; padding: 12px; border-radius: 10px; margin-top: 10px; font-size: 15px; color: #5a4d00; text-align: left; }
-    
-    .judul {
-        font-size: 43px; font-weight: bold; line-height: 1.2; text-align: left; margin-bottom: 20px;
-    }
-    @media (max-width: 600px) { .judul { font-size: 30px; } }
     </style>
 """, unsafe_allow_html=True)
 
@@ -118,8 +102,10 @@ st.write("Upload gambar tomat (buah/daun) untuk mendeteksi penyakit dan cara pen
 
 # === 7. Upload gambar ===
 st.write("Pilih gambar tomat")
+
 st.markdown('''
     <div class="upload-wrapper">
+        <!-- Lapisan Bawah (Desain) -->
         <div class="upload-box-visual">
             <div class="info-left">
                 <div class="cloud-icon">☁️</div>
@@ -132,7 +118,9 @@ st.markdown('''
         </div>
 ''', unsafe_allow_html=True)
 
+# Lapisan Atas (Fungsi Asli - Transparan)
 uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"], label_visibility="collapsed")
+
 st.markdown('</div>', unsafe_allow_html=True)
 
 if uploaded_file is not None:
