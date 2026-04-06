@@ -12,21 +12,7 @@ st.set_page_config(page_title="Deteksi Penyakit Tanaman Tomat", page_icon="🍅"
 # === 2. Gaya CSS ===
 st.markdown("""
     <style>
-    /* Background & Header */
-    [data-testid="stAppViewContainer"] { background-color: #ffe6e6; }
-    header[data-testid="stHeader"] { background-color: #ff4d4d; }
-
-    /* Judul Custom */
-    .judul {
-        font-size: 40px;
-        font-weight: bold;
-        line-height: 1.2;
-        text-align: left;
-        margin-bottom: 10px;
-        color: #333;
-    }
-
-    /* Container Utama untuk Layering */
+    /* Container utama untuk menumpuk elemen */
     .upload-wrapper {
         position: relative;
         width: 100%;
@@ -35,7 +21,7 @@ st.markdown("""
         margin-bottom: 20px;
     }
 
-    /* Tampilan Visual (Yang Dilihat User) */
+    /* Kotak Visual yang dilihat user (Sinkron dengan HTML) */
     .upload-box-visual {
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
@@ -47,7 +33,7 @@ st.markdown("""
         padding: 0 25px;
         background-color: #ffffff;
         z-index: 1;
-        pointer-events: none; /* Klik akan tembus ke uploader asli */
+        pointer-events: none;
     }
 
     .info-left { display: flex; align-items: center; gap: 15px; }
@@ -56,27 +42,31 @@ st.markdown("""
     .text-sub { font-size: 12px; color: #888; }
     .browse-text { font-weight: bold; text-decoration: underline; color: #333; font-size: 14px; }
 
-    /* Menyembunyikan Widget Asli Streamlit tapi tetap bisa diklik */
+    /* Membuat Uploader Asli Streamlit Transparan di Atasnya */
     [data-testid="stFileUploader"] {
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 2;
-        opacity: 0; /* Transparan */
+        z-index: 10;
+        opacity: 0; 
     }
-    [data-testid="stFileUploader"] section { padding: 0; height: 100px; }
+    
+    [data-testid="stFileUploader"] section {
+        padding: 0;
+        height: 100px;
+    }
 
-    /* Box Hasil & Penanganan */
-    .result-box {
-        padding: 15px; border-radius: 12px; text-align: center;
-        font-size: 20px; font-weight: bold; margin-top: 20px;
-    }
+    /* Sisa Gaya Visual */
+    [data-testid="stAppViewContainer"] { background-color: #ffe6e6; }
+    header[data-testid="stHeader"] { background-color: #ff4d4d; }
+    .result-box { padding: 15px; border-radius: 12px; text-align: center; font-size: 20px; font-weight: bold; }
     .healthy { background-color: #e6ffe6; color: green; border: 2px solid green; }
     .disease { background-color: #f3f3f3; color: #b30000; border: 2px solid #b30000; }
-    .treatment-box {
-        background-color: #fffbea; border: 2px dashed #ffb84d;
-        padding: 15px; border-radius: 10px; margin-top: 15px;
-        font-size: 14px; color: #5a4d00;
+    .treatment-box { background-color: #fffbea; border: 2px dashed #ffb84d; padding: 12px; border-radius: 10px; margin-top: 10px; font-size: 15px; color: #5a4d00; text-align: left; }
+    
+    .judul {
+        font-size: 43px; font-weight: bold; line-height: 1.2; text-align: left; margin-bottom: 20px;
     }
+    @media (max-width: 600px) { .judul { font-size: 30px; } }
     </style>
 """, unsafe_allow_html=True)
 
@@ -120,41 +110,12 @@ treatments = {
 }
 
 # === 6. Judul halaman ===
-st.markdown(
-    """
-    <style>
-        .judul {
-            font-size: 43px; /* Ukuran di Laptop */
-            font-weight: bold;
-            line-height: 1.2;
-            text-align: left;
-            margin-bottom: 20px;
-        }
-
-        /* Kode khusus untuk layar kecil (HP) */
-        @media (max-width: 600px) {
-            .judul {
-                font-size: 39px; /* Huruf mengecil sedikit di HP agar pas 2-3 baris */
-                margin-bottom: 15px; 
-            }
-        }
-    </style>
-    
-    <div class="judul">
-        🍅 Deteksi Penyakit Tanaman Tomat
-    </div>
-    """, 
-    unsafe_allow_html=True
-)
-st.write("Upload gambar tomat (buah/daun), lalu sistem akan mendeteksi jenis penyakit yang menyerang tanaman tomat serta menampilkan cara penanganannya.")
-
-# === 7. Upload gambar ===
 st.markdown('<div class="judul">🍅 Deteksi Penyakit Tanaman Tomat</div>', unsafe_allow_html=True)
 st.write("Upload gambar tomat (buah/daun) untuk mendeteksi penyakit dan cara penanganannya.")
 
-st.write("Pilih gambar tomat")
 
-# --- Bagian Custom Upload Box ---
+# === 7. Upload gambar ===
+st.write("Pilih gambar tomat")
 st.markdown('''
     <div class="upload-wrapper">
         <div class="upload-box-visual">
@@ -169,11 +130,8 @@ st.markdown('''
         </div>
 ''', unsafe_allow_html=True)
 
-# Widget asli yang ditumpuk di atas visual (dibuat transparan oleh CSS)
 uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"], label_visibility="collapsed")
-
-st.markdown('</div>', unsafe_allow_html=True) # Tutup upload-wrapper
-# ------------------------------
+st.markdown('</div>', unsafe_allow_html=True)
 
 if uploaded_file is not None:
     img = Image.open(uploaded_file)
