@@ -12,6 +12,28 @@ st.set_page_config(page_title="Deteksi Penyakit Tanaman Tomat", page_icon="🍅"
 # === 2. Gaya CSS ===
 st.markdown("""
     <style>
+    .upload-box {
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    color: #666;
+    background-color: #fff;
+    margin: 20px auto;
+    max-width: 600px;
+    }
+
+        /* Sembunyikan label uploader */
+    [data-testid="stFileUploader"] label {
+        display: none;
+    }
+    
+    /* Tengahin uploader */
+    [data-testid="stFileUploader"] {
+        display: flex;
+        justify-content: center;
+    }
+    
     [data-testid="stAppViewContainer"] {
         background-color: #ffe6e6;
     }
@@ -117,7 +139,22 @@ st.markdown(
 st.write("Upload gambar tomat (buah/daun), lalu sistem akan mendeteksi jenis penyakit yang menyerang tanaman tomat serta menampilkan cara penanganannya.")
 
 # === 7. Upload gambar ===
-uploaded_file = st.file_uploader("Pilih gambar tomat", type=["jpg", "jpeg", "png"])
+# uploaded_file = st.file_uploader("Pilih gambar tomat", type=["jpg", "jpeg", "png"])
+# === BOX CUSTOM (TAMPILAN SKRIPSI) ===
+st.markdown("""
+<div class="upload-box">
+    📁 <b>Drag and drop file here</b><br>
+    Klik atau seret gambar tomat untuk dideteksi<br><br>
+    <small>Format: JPG, PNG, JPEG</small>
+</div>
+""", unsafe_allow_html=True)
+
+# === FILE UPLOADER ASLI (DISEMBUNYIKAN LABELNYA) ===
+uploaded_file = st.file_uploader(
+    "", 
+    type=["jpg", "jpeg", "png"], 
+    label_visibility="collapsed"
+)
 
 if uploaded_file is not None:
     img = Image.open(uploaded_file)
