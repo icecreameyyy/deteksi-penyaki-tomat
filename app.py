@@ -21,7 +21,7 @@ st.markdown("""
         margin-bottom: 20px;
     }
 
-    /* Kotak Visual yang dilihat user (Sinkron dengan HTML) */
+    /* Kotak Visual yang dilihat user */
     .upload-box-visual {
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
@@ -33,7 +33,7 @@ st.markdown("""
         padding: 0 25px;
         background-color: #ffffff;
         z-index: 1;
-        pointer-events: none;
+        pointer-events: none; /* Klik tembus ke widget asli */
     }
 
     .info-left { display: flex; align-items: center; gap: 15px; }
@@ -42,7 +42,7 @@ st.markdown("""
     .text-sub { font-size: 12px; color: #888; }
     .browse-text { font-weight: bold; text-decoration: underline; color: #333; font-size: 14px; }
 
-    /* Membuat Uploader Asli Streamlit Transparan di Atasnya */
+    /* Membuat Uploader Asli Streamlit Transparan & Menutupi Seluruh Area */
     [data-testid="stFileUploader"] {
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
@@ -50,12 +50,14 @@ st.markdown("""
         opacity: 0; 
     }
     
+    /* Memastikan section internal uploader memenuhi container */
     [data-testid="stFileUploader"] section {
-        padding: 0;
-        height: 100px;
+        padding: 0 !important;
+        height: 100px !important;
+        min-height: 100px !important;
     }
 
-    /* Sisa Gaya Visual */
+    /* Dekorasi lainnya */
     [data-testid="stAppViewContainer"] { background-color: #ffe6e6; }
     header[data-testid="stHeader"] { background-color: #ff4d4d; }
     .result-box { padding: 15px; border-radius: 12px; text-align: center; font-size: 20px; font-weight: bold; }
