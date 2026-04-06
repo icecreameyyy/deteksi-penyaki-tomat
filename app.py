@@ -12,60 +12,70 @@ st.set_page_config(page_title="Deteksi Penyakit Tanaman Tomat", page_icon="🍅"
 # === 2. Gaya CSS ===
 st.markdown("""
     <style>
-    .upload-box {
-    border: 2px dashed #ccc;
-    border-radius: 12px;
-    padding: 40px;
-    text-align: center;
-    color: #666;
-    background-color: #fff;
-    margin: 20px auto;
-    max-width: 600px;
+    /* Background & Header */
+    [data-testid="stAppViewContainer"] { background-color: #ffe6e6; }
+    header[data-testid="stHeader"] { background-color: #ff4d4d; }
+
+    /* Judul Custom */
+    .judul {
+        font-size: 40px;
+        font-weight: bold;
+        line-height: 1.2;
+        text-align: left;
+        margin-bottom: 10px;
+        color: #333;
     }
 
-        /* Sembunyikan label uploader */
-    [data-testid="stFileUploader"] label {
-        display: none;
-    }
-    
-    /* Tengahin uploader */
-    [data-testid="stFileUploader"] {
-        display: flex;
-        justify-content: center;
-    }
-    
-    [data-testid="stAppViewContainer"] {
-        background-color: #ffe6e6;
-    }
-    header[data-testid="stHeader"] {
-        background-color: #ff4d4d;
-    }
-    .result-box {
-        padding: 15px;
-        border-radius: 12px;
-        text-align: center;
-        font-size: 20px;
-        font-weight: bold;
-    }
-    .healthy {
-        background-color: #e6ffe6;
-        color: green;
-        border: 2px solid green;
-    }
-    .disease {
-        background-color: #f3f3f3;
-        color: #b30000;
-        border: 2px solid #b30000;
-    }
-    .treatment-box {
-        background-color: #fffbea;
-        border: 2px dashed #ffb84d;
-        padding: 12px;
-        border-radius: 10px;
+    /* Container Utama untuk Layering */
+    .upload-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100px;
         margin-top: 10px;
-        font-size: 15px;
-        color: #5a4d00;
-        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    /* Tampilan Visual (Yang Dilihat User) */
+    .upload-box-visual {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        border: 2px dashed #ccc;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 25px;
+        background-color: #ffffff;
+        z-index: 1;
+        pointer-events: none; /* Klik akan tembus ke uploader asli */
+    }
+
+    .info-left { display: flex; align-items: center; gap: 15px; }
+    .cloud-icon { font-size: 35px; color: #888; }
+    .text-main { font-weight: bold; font-size: 15px; color: #333; display: block; }
+    .text-sub { font-size: 12px; color: #888; }
+    .browse-text { font-weight: bold; text-decoration: underline; color: #333; font-size: 14px; }
+
+    /* Menyembunyikan Widget Asli Streamlit tapi tetap bisa diklik */
+    [data-testid="stFileUploader"] {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: 2;
+        opacity: 0; /* Transparan */
+    }
+    [data-testid="stFileUploader"] section { padding: 0; height: 100px; }
+
+    /* Box Hasil & Penanganan */
+    .result-box {
+        padding: 15px; border-radius: 12px; text-align: center;
+        font-size: 20px; font-weight: bold; margin-top: 20px;
+    }
+    .healthy { background-color: #e6ffe6; color: green; border: 2px solid green; }
+    .disease { background-color: #f3f3f3; color: #b30000; border: 2px solid #b30000; }
+    .treatment-box {
+        background-color: #fffbea; border: 2px dashed #ffb84d;
+        padding: 15px; border-radius: 10px; margin-top: 15px;
+        font-size: 14px; color: #5a4d00;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -139,22 +149,31 @@ st.markdown(
 st.write("Upload gambar tomat (buah/daun), lalu sistem akan mendeteksi jenis penyakit yang menyerang tanaman tomat serta menampilkan cara penanganannya.")
 
 # === 7. Upload gambar ===
-# uploaded_file = st.file_uploader("Pilih gambar tomat", type=["jpg", "jpeg", "png"])
-# === BOX CUSTOM (TAMPILAN SKRIPSI) ===
-st.markdown("""
-<div class="upload-box">
-    📁 <b>Drag and drop file here</b><br>
-    Klik atau seret gambar tomat untuk dideteksi<br><br>
-    <small>Format: JPG, PNG, JPEG</small>
-</div>
-""", unsafe_allow_html=True)
+st.markdown('<div class="judul">🍅 Deteksi Penyakit Tanaman Tomat</div>', unsafe_allow_html=True)
+st.write("Upload gambar tomat (buah/daun) untuk mendeteksi penyakit dan cara penanganannya.")
 
-# === FILE UPLOADER ASLI (DISEMBUNYIKAN LABELNYA) ===
-uploaded_file = st.file_uploader(
-    "", 
-    type=["jpg", "jpeg", "png"], 
-    label_visibility="collapsed"
-)
+st.write("Pilih gambar tomat")
+
+# --- Bagian Custom Upload Box ---
+st.markdown('''
+    <div class="upload-wrapper">
+        <div class="upload-box-visual">
+            <div class="info-left">
+                <div class="cloud-icon">☁️</div>
+                <div>
+                    <span class="text-main">Drag and drop file here</span>
+                    <span class="text-sub">Limit 200MB per file - JPG, JPEG, PNG</span>
+                </div>
+            </div>
+            <div class="browse-text">Browse files</div>
+        </div>
+''', unsafe_allow_html=True)
+
+# Widget asli yang ditumpuk di atas visual (dibuat transparan oleh CSS)
+uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"], label_visibility="collapsed")
+
+st.markdown('</div>', unsafe_allow_html=True) # Tutup upload-wrapper
+# ------------------------------
 
 if uploaded_file is not None:
     img = Image.open(uploaded_file)
